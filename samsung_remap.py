@@ -6,6 +6,7 @@ import sys
 
 # --- CONFIGURAÇÕES ---
 DEVICE_NAME = "Smart Control"
+VIRTUAL_DEVICE_NAME = "Smart Control Mapped"
 DEBOUNCE_TIME = 0.2  # Timeout de 0.2s para evitar cliques duplos do Bluetooth
 
 # --- FUNÇÕES DE COMANDO ---
@@ -21,10 +22,10 @@ mapping = {
     160: ecodes.KEY_A,			# Botão Microfone (Exemplo: tecla 'A')
     210: ecodes.KEY_KBDILLUMTOGGLE,	# Botão 123 (Mapeado para toggle de luz de teclado ou livre)
     246: ecodes.KEY_B,			# Botão Paisagem (Exemplo: tecla 'B')
-    96:  ecodes.KEY_UP,         	# Cima
+    96:  ecodes.KEY_UP,			# Cima
     97:  ecodes.KEY_DOWN,       	# Baixo
+    98:  ecodes.KEY_RIGHT,              # Direita
     101: ecodes.KEY_LEFT,       	# Esquerda
-    98:  ecodes.KEY_RIGHT,      	# Direita
     104: ecodes.KEY_ENTER,      	# Centro (OK)
     88:  ecodes.KEY_ESC,        	# Botão Voltar (Mapeado como ESC para sair de menus)
     121: ecodes.KEY_LEFTMETA,   	# Botão Home (Mapeado para a tecla 'Super/Windows' para abrir o menu)
@@ -36,8 +37,8 @@ mapping = {
     16:  ecodes.KEY_PREVIOUSSONG, 	# Channel - (Mídia Anterior)
     79:  ecodes.KEY_C,          	# Channel Central (Exemplo: tecla 'C')
     243: ecodes.KEY_D,    		# Botão Netflix (Exemplo: tecla 'D')
-    244: ecodes.KEY_E, 			# Botão Prime Video (Exemplo: tecla 'F')
-    191: ecodes.KEY_F, 			# Botão Globo Play (Exemplo: tecla 'G')
+    244: ecodes.KEY_E, 			# Botão Prime Video (Exemplo: tecla 'E')
+    191: ecodes.KEY_F, 			# Botão Globo Play (Exemplo: tecla 'F')
 }
 
 def find_correct_instance():
@@ -77,7 +78,7 @@ def main():
 
     # Criação do dispositivo virtual
     registered_keys = [v for v in mapping.values() if isinstance(v, int)]
-    ui = evdev.UInput({ecodes.EV_KEY: registered_keys})
+    ui = evdev.UInput({ecodes.EV_KEY: registered_keys}, name=VIRTUAL_DEVICE_NAME)
 
     last_event_time = 0
     last_value = None
@@ -105,7 +106,7 @@ def main():
 
     except (OSError, evdev.IOError):
         print("Dispositivo desconectado.")
-        sys.exit(1)
+        sys.exit(0)
 
 if __name__ == "__main__":
     main()
