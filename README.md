@@ -136,13 +136,15 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 ```
 
 ### Configurações
-&#8195;A maioria das configurações relevantes serão encontradas no [samsung_remap.py](samsung_remap.py), ele é quem está encarregado de fazer o mapeamento, das configurações podemos ressaltar: 
+&#8195;A maioria das configurações relevantes serão encontradas no [samsung_remap.py](samsung_remap.py), ele é quem está encarregado de fazer o mapeamento. Das configurações podemos ressaltar: 
 
-* Configuração de timeout: [DEBOUNCE_TIME = 0.2](samsung_remap.py#L9) (essa configuração é necessária pois o controle envia dois sinais para um clique de botão, o que evita erros caso um sinal se perca, se não houver timeout ocorrerá um clique duplo).
+* Nome do projeto: [VIRTUAL_DEVICE_NAME](samsung_remap.py#L9) (o nome definido aqui será mostrado nos dispositivos conectados).
 
-* Configurações de funções: [def power_off():](samsung_remap.py#L12) (como estamos usando um script em python para mapear o controle podemos criar funções específicas e definir para qualquer botão).
+* Configuração de timeout: [DEBOUNCE_TIME = 0.2](samsung_remap.py#L10) (essa configuração é necessária pois o controle envia dois sinais para um clique de botão, o que evita erros caso um sinal se perca, se não houver timeout ocorrerá um clique duplo).
 
-* Mapeamento dos botões: [mapping =](samsung_remap.py#L19) (aqui está mapeado cada botão, para alterar a função de algum botão basta alterar esse segmento do código).
+* Configurações de funções: [def power_off():](samsung_remap.py#L13) (como estamos usando um script em python para mapear o controle podemos criar funções específicas e definir para qualquer botão).
+
+* Mapeamento dos botões: [mapping =](samsung_remap.py#L20) (aqui está mapeado cada botão, para alterar a função de algum botão basta alterar esse segmento do código).
 
 ### Notas
 
